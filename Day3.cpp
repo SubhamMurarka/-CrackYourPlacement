@@ -49,4 +49,22 @@ public:
     }
 };
 
-//Q9 : 
+//Q9 : Rotate Image
+
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int ro = matrix.size();
+        int col = matrix[0].size();
+        for(int i=0; i<ro; i++) {
+            for(int j=0; j<=i; j++) {
+                int k = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = k;
+            }
+        }
+        for(int i=0; i<ro; i++) {
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+    }
+};
