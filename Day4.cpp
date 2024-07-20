@@ -68,5 +68,3 @@ public:
         return cnt;
     }
 };
-
-Q12 : 
