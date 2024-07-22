@@ -100,4 +100,66 @@ public:
     }
 };
 
-//Q19 : 
+//Q19 : move 0 to end
+
+
+class Solution {
+public:
+
+    // [0 0 1 3 12]
+    void moveZeroes(vector<int>& nums) {
+        //[0 1 0 3 12]
+        //[1 0 0 3 12] [1  0 0 3 12] [1 0 3 0 12] [1 0 3 12 0]
+        vector<int>nums1 = nums;
+        nums.erase(nums.begin(), nums.end());
+        for(int i=0; i<nums1.size(); i++) {
+            if(nums1[i]!=0) nums.push_back(nums1[i]);
+        }
+        int diff = nums1.size() - nums.size();
+        for(int i=0; i<diff; i++) nums.push_back(0);
+    }
+};
+
+// optimal
+
+class Solution {
+public:
+
+    // [0 0 1 3 12]
+    void moveZeroes(vector<int>& nums) {
+        int n=nums.size();
+        int i=0, j=1;
+        while(i<n && j<n) {
+            if(nums[i]==0 && nums[j]!=0) {
+                swap(nums[i], nums[j]);
+            } else if(nums[i] == 0 && nums[j] == 0) {
+                while(j<n && nums[j]==0) j++;
+                if(j < n) swap(nums[i], nums[j]);
+            }
+            i++; j++;
+        }
+    }
+};
+
+//Q20 : 2 sum
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> mp;
+        vector<int> ans;
+        int n = nums.size();
+        
+        for (int i = 0; i < n; i++) {
+            int diff = target - nums[i];
+            if (mp.find(diff) != mp.end()) {
+                ans.push_back(mp[diff]);
+                ans.push_back(i);
+                break;
+            }
+            mp[nums[i]] = i;
+        }
+        
+        return ans;
+    }
+};
